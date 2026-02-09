@@ -1,0 +1,1067 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美食大冒险</title>
+    
+    <!-- PWA相关 -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIue+jumjn+Wkp+WGkemZqyIsCiAgInNob3J0X25hbWUiOiAi576O6aOf5aSn5YaR6ZmrIiwKICAic3RhcnRfdXJsIjogIi4vIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjRkY2QjZCIiwKICAidGhlbWVfY29sb3IiOiAiI0ZGNkI2QiIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjNhV1IwYUQwaU1qQXdJaUJvWldsbmFIUTlJakl3TUNJZ2RtbGxkMEp2ZUQwaU1DQXdJREl3TUNBME1EQWlJR1pwYkd3OUlpTkdSalk2UWlJZ2VHMXNibk05SW1oMGRIQTZMeTkzZDNjdWR6TXViM0puTHpJd01EQXZjM1puSWo0S0lDQWdJRHgwWlhoMElIZzlJakV3TUNJZ2VUMGlNakF3SWlCbWIyNTBMWE5wZW1VOUlqWXdJaUJtYjI1MExYZGxhV2RvZEQwaVltOXNaQ0lnWm1sc2JEMGlkMmhwZEdVaVBrZFBQQzkwWlhoMFBnbzhMM04yWno0PSIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCM2FXUjBhRDBpTlRFeUlpQm9aV2xuYUhROUlqVXhNaUlnZG1sbGQwSnZlRDBpTUNBd0lEVXhNaUExTVRJaUlHWnBiR3c5SWlOR1JqWTJRaUlnZUcxc2JuTTlJbWgwZEhBNkx5OTNkM2N1ZHpNdWIzSm5Mekl3TURBdmMzWm5Jam9LSUNBZ0lEeDBaWGgwSUhnOUlqSTFOaUlnZVQwaU1qVTJJaUJtYjI1MExYTnBlbVU5SWpFME5DSWdabTl1ZEMxM1pXbG5hSFE5SW1KdmJHUWlJR1pwYkd3OUluZG9hWFJsSWo1SFR6d3ZkR1Y0ZEQ0S1BDOTJZEJNK==IiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIgogICAgfQogIF0KfQ==">
+    <meta name="theme-color" content="#FF6B6B">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCA0MDAiIGZpbGw9IiNGRjY2QiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDx0ZXh0IHg9IjEwMCIgeT0iMjAwIiBmb250LXNpemU9IjYwIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0id2hpdGUiPkdPPC90ZXh0Pgo8L3N2Zz4K">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+        .app-container {
+            max-width: 414px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        /* 添加安装提示 */
+        .install-prompt {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 10001;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transform: translateY(100px);
+            transition: transform 0.3s ease;
+        }
+
+        .install-prompt.show {
+            transform: translateY(0);
+        }
+
+        .install-btn {
+            background: white;
+            color: #FF6B6B;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 5px;
+            margin-left: 10px;
+        }
+
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s;
+        }
+
+        .splash-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .splash-logo {
+            width: 150px;
+            height: 150px;
+            background: white;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: bounce 1s ease infinite;
+            color: #FF6B6B;
+            font-weight: 900;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .splash-title {
+            font-size: 42px;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 15px;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .splash-subtitle {
+            font-size: 20px;
+            color: rgba(255,255,255,0.95);
+        }
+
+        .main-screen {
+            padding: 20px;
+            padding-bottom: 100px;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .main-screen.show {
+            opacity: 1;
+        }
+
+        .character-card {
+            background: white;
+            border-radius: 30px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .character-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .character-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 8px 20px rgba(255,107,107,0.4);
+            color: white;
+            font-weight: 700;
+        }
+
+        .character-info {
+            flex: 1;
+        }
+
+        .character-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #FF6B6B;
+            margin-bottom: 5px;
+        }
+
+        .character-title {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .character-speech {
+            background: linear-gradient(135deg, #FFF5F5 0%, #F0F9FF 100%);
+            border-radius: 20px;
+            padding: 15px 20px;
+            border: 3px solid #FF6B6B;
+        }
+
+        .speech-text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
+            user-select: none;
+        }
+
+        .stat-card:active {
+            transform: scale(0.95);
+        }
+
+        .stat-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #FF6B6B;
+            margin-bottom: 3px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .action-section {
+            background: white;
+            border-radius: 30px;
+            padding: 30px 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .wheel-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            margin: 30px auto;
+        }
+
+        .wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                #FF6B6B 0deg 60deg,
+                #4ECDC4 60deg 120deg,
+                #FFE66D 120deg 180deg,
+                #A8E6CF 180deg 240deg,
+                #FFB347 240deg 300deg,
+                #FFB6C1 300deg 360deg
+            );
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            position: relative;
+            transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+        }
+
+        .wheel-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 2;
+            color: #FF6B6B;
+            font-weight: 900;
+        }
+
+        .wheel-pointer {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 40px solid #FF6B6B;
+            z-index: 3;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+        }
+
+        .wheel-items {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .wheel-item {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50%;
+            height: 20px;
+            transform-origin: left center;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 20px;
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .wheel-item:nth-child(1) { transform: translate(0, -50%) rotate(30deg); }
+        .wheel-item:nth-child(2) { transform: translate(0, -50%) rotate(90deg); }
+        .wheel-item:nth-child(3) { transform: translate(0, -50%) rotate(150deg); }
+        .wheel-item:nth-child(4) { transform: translate(0, -50%) rotate(210deg); }
+        .wheel-item:nth-child(5) { transform: translate(0, -50%) rotate(270deg); }
+        .wheel-item:nth-child(6) { transform: translate(0, -50%) rotate(330deg); }
+
+        .big-button {
+            width: 100%;
+            padding: 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255,107,107,0.4);
+            transition: transform 0.2s;
+            user-select: none;
+        }
+
+        .big-button:active {
+            transform: scale(0.95);
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .quick-btn {
+            padding: 18px;
+            border: 3px solid #FF6B6B;
+            border-radius: 20px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            user-select: none;
+        }
+
+        .quick-btn:active {
+            transform: scale(0.95);
+            background: #FF6B6B;
+        }
+
+        .quick-btn:active .quick-label {
+            color: white;
+        }
+
+        .quick-label {
+            font-size: 15px;
+            font-weight: 600;
+            color: #FF6B6B;
+        }
+
+        .restaurant-card {
+            background: white;
+            border-radius: 25px;
+            padding: 25px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .restaurant-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .detail-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .detail-highlight {
+            color: #FF6B6B;
+            font-weight: 700;
+        }
+
+        .restaurant-actions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .action-btn {
+            padding: 12px;
+            border: none;
+            border-radius: 15px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            user-select: none;
+        }
+
+        .action-btn:active {
+            transform: scale(0.95);
+        }
+
+        .action-btn-primary {
+            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+            color: white;
+        }
+
+        .action-btn-secondary {
+            background: white;
+            color: #FF6B6B;
+            border: 2px solid #FF6B6B;
+        }
+
+        .toast {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+            color: white;
+            padding: 16px 28px;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: 600;
+            z-index: 10000;
+            box-shadow: 0 10px 30px rgba(255,107,107,0.4);
+            max-width: 85%;
+            text-align: center;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9998;
+        }
+
+        .loading-content {
+            text-align: center;
+            padding: 50px 40px;
+            background: white;
+            border-radius: 30px;
+            max-width: 320px;
+        }
+
+        .loading-spinner {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .spinner-circle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 6px solid #FFE5F0;
+            border-top-color: #FF6B6B;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #FF6B6B;
+            margin-bottom: 10px;
+        }
+
+        .loading-text {
+            font-size: 15px;
+            color: #666;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* 移动端优化 */
+        @media (max-width: 480px) {
+            .app-container {
+                max-width: 100%;
+            }
+            
+            .main-screen {
+                padding: 15px;
+                padding-bottom: 80px;
+            }
+            
+            .wheel-container {
+                width: 260px;
+                height: 260px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- 安装提示 -->
+        <div id="installPrompt" class="install-prompt">
+            <div>
+                <div>📱 添加到主屏幕</div>
+                <div style="font-size: 12px; opacity: 0.9; margin-top: 3px;">像原生App一样使用</div>
+            </div>
+            <div>
+                <button id="installBtn" class="install-btn">安装</button>
+                <button id="closePrompt" class="close-btn">×</button>
+            </div>
+        </div>
+
+        <div id="splashScreen" class="splash-screen">
+            <div class="splash-logo">GO</div>
+            <h1 class="splash-title">美食大冒险</h1>
+            <p class="splash-subtitle">今天吃什么？</p>
+        </div>
+
+        <div id="mainScreen" class="main-screen">
+            <div class="character-card">
+                <div class="character-header">
+                    <div class="character-avatar" id="characterAvatar">AI</div>
+                    <div class="character-info">
+                        <div class="character-name">美食小助手</div>
+                        <div class="character-title">你的专属美食顾问</div>
+                    </div>
+                </div>
+                <div class="character-speech">
+                    <div class="speech-text" id="speechText">
+                        嗨！欢迎来到美食大冒险！<br>
+                        让我帮你找到今天最想吃的美食吧！
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-container">
+                <div class="stat-card" id="achievementBtn">
+                    <div class="stat-icon">★</div>
+                    <div class="stat-value" id="achievementCount">0</div>
+                    <div class="stat-label">成就</div>
+                </div>
+                <div class="stat-card" id="historyBtn">
+                    <div class="stat-icon">♥</div>
+                    <div class="stat-value" id="visitCount">0</div>
+                    <div class="stat-label">打卡</div>
+                </div>
+                <div class="stat-card" id="luckyBtn">
+                    <div class="stat-icon">◆</div>
+                    <div class="stat-value">1</div>
+                    <div class="stat-label">幸运值</div>
+                </div>
+            </div>
+
+            <div id="wheelSection" class="action-section">
+                <div class="section-title">
+                    <span>●</span>
+                    <span>转动命运之轮</span>
+                </div>
+
+                <div class="wheel-container">
+                    <div class="wheel-pointer"></div>
+                    <div class="wheel" id="wheel">
+                        <div class="wheel-items">
+                            <div class="wheel-item">川菜</div>
+                            <div class="wheel-item">粤菜</div>
+                            <div class="wheel-item">日料</div>
+                            <div class="wheel-item">火锅</div>
+                            <div class="wheel-item">烧烤</div>
+                            <div class="wheel-item">西餐</div>
+                        </div>
+                        <div class="wheel-center">GO</div>
+                    </div>
+                </div>
+
+                <button class="big-button" id="spinBtn">
+                    开始冒险
+                </button>
+
+                <div class="quick-actions">
+                    <div class="quick-btn" id="nearbyBtn">
+                        <div class="quick-label">附近推荐</div>
+                    </div>
+                    <div class="quick-btn" id="cheapBtn">
+                        <div class="quick-label">今日特惠</div>
+                    </div>
+                    <div class="quick-btn" id="hotBtn">
+                        <div class="quick-label">人气榜单</div>
+                    </div>
+                    <div class="quick-btn" id="randomBtn">
+                        <div class="quick-label">随机探索</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="resultsSection" class="action-section hidden">
+                <div class="section-title">
+                    <span>★</span>
+                    <span>为你找到这些美食</span>
+                </div>
+                <div id="restaurantList"></div>
+                <button class="big-button" id="backBtn">
+                    再来一次
+                </button>
+            </div>
+        </div>
+
+        <div id="loadingOverlay" class="loading-overlay hidden">
+            <div class="loading-content">
+                <div class="loading-spinner">
+                    <div class="spinner-circle"></div>
+                </div>
+                <div class="loading-title" id="loadingTitle">正在寻找美食...</div>
+                <div class="loading-text" id="loadingText">AI正在分析你的口味</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const CONFIG = {
+            AMAP_WEB_KEY: '2dfdea64105c073c530dd6c7cf294f12',
+            SEARCH_RADIUS: 5000,
+            MAX_RESULTS: 10
+        };
+
+        const AppState = {
+            location: null,
+            restaurants: [],
+            achievements: [],
+            visitHistory: [],
+            isSpinning: false,
+            deferredPrompt: null
+        };
+
+        const TASTE_MAP = ['川菜', '粤菜', '日料', '火锅', '烧烤', '西餐'];
+
+        // PWA安装相关
+        let deferredPrompt;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            showInstallPrompt();
+        });
+
+        function showInstallPrompt() {
+            const prompt = document.getElementById('installPrompt');
+            setTimeout(() => {
+                prompt.classList.add('show');
+            }, 3000);
+        }
+
+        function hideInstallPrompt() {
+            document.getElementById('installPrompt').classList.remove('show');
+        }
+
+        async function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    showToast('安装成功！');
+                }
+                deferredPrompt = null;
+                hideInstallPrompt();
+            } else {
+                // iOS Safari 手动安装提示
+                showToast('请点击分享按钮，然后选择"添加到主屏幕"');
+            }
+        }
+
+        function init() {
+            loadLocalData();
+            
+            // PWA事件监听
+            document.getElementById('installBtn').addEventListener('click', installApp);
+            document.getElementById('closePrompt').addEventListener('click', hideInstallPrompt);
+            
+            setTimeout(() => {
+                document.getElementById('splashScreen').classList.add('fade-out');
+                document.getElementById('mainScreen').classList.add('show');
+                getLocation();
+            }, 2500);
+
+            document.getElementById('spinBtn').addEventListener('click', spinWheel);
+            document.getElementById('nearbyBtn').addEventListener('click', () => quickSearch('美食'));
+            document.getElementById('cheapBtn').addEventListener('click', () => quickSearch('快餐'));
+            document.getElementById('hotBtn').addEventListener('click', () => quickSearch('火锅'));
+            document.getElementById('randomBtn').addEventListener('click', () => {
+                quickSearch(TASTE_MAP[Math.floor(Math.random() * TASTE_MAP.length)]);
+            });
+            document.getElementById('backBtn').addEventListener('click', backToWheel);
+            document.getElementById('achievementBtn').addEventListener('click', showAchievements);
+            document.getElementById('historyBtn').addEventListener('click', showHistory);
+            document.getElementById('luckyBtn').addEventListener('click', showLucky);
+
+            // 注册Service Worker
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('data:text/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdpbnN0YWxsJywgZXZlbnQgPT4gewogIGV2ZW50LndhaXRVbnRpbChzZWxmLnNraXBXYWl0aW5nKCkpOwp9KTsKCnNlbGYuYWRkRXZlbnRMaXN0ZW5lcignYWN0aXZhdGUnLCBldmVudCA9PiB7CiAgZXZlbnQud2FpdFVudGlsKHNlbGYuY2xpZW50cy5jbGFpbSgpKTsKfSk7CgpzZWxmLmFkZEV2ZW50TGlzdGVuZXIoJ2ZldGNoJywgZXZlbnQgPT4gewogIGV2ZW50LnJlc3BvbmRXaXRoKGZldGNoKGV2ZW50LnJlcXVlc3QpKTsKfSk7')
+                .then(() => console.log('Service Worker registered'))
+                .catch(() => console.log('Service Worker registration failed'));
+            }
+        }
+
+        function loadLocalData() {
+            try {
+                const visits = localStorage.getItem('visitHistory');
+                const achievements = localStorage.getItem('achievements');
+                
+                if (visits) {
+                    AppState.visitHistory = JSON.parse(visits);
+                    document.getElementById('visitCount').textContent = AppState.visitHistory.length;
+                }
+                
+                if (achievements) {
+                    AppState.achievements = JSON.parse(achievements);
+                    document.getElementById('achievementCount').textContent = AppState.achievements.length;
+                }
+            } catch (e) {}
+        }
+
+        function saveVisit(restaurant) {
+            AppState.visitHistory.push({
+                name: restaurant.name,
+                date: new Date().toISOString()
+            });
+            try {
+                localStorage.setItem('visitHistory', JSON.stringify(AppState.visitHistory));
+                document.getElementById('visitCount').textContent = AppState.visitHistory.length;
+                checkAchievements();
+            } catch (e) {}
+        }
+
+        function checkAchievements() {
+            const count = AppState.visitHistory.length;
+            const achievements = [
+                { id: 1, count: 1, title: '美食新手', desc: '完成第一次打卡' },
+                { id: 2, count: 5, title: '美食达人', desc: '打卡5家餐厅' },
+                { id: 3, count: 10, title: '美食专家', desc: '打卡10家餐厅' }
+            ];
+            
+            achievements.forEach(achievement => {
+                if (count === achievement.count && !AppState.achievements.find(a => a.id === achievement.id)) {
+                    AppState.achievements.push(achievement);
+                    try {
+                        localStorage.setItem('achievements', JSON.stringify(AppState.achievements));
+                        document.getElementById('achievementCount').textContent = AppState.achievements.length;
+                        showToast('🎉 解锁成就：' + achievement.title);
+                    } catch (e) {}
+                }
+            });
+        }
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        AppState.location = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        showToast('📍 定位成功！');
+                    },
+                    () => useIPLocation(),
+                    { timeout: 5000, enableHighAccuracy: true }
+                );
+            } else {
+                useIPLocation();
+            }
+        }
+
+        async function useIPLocation() {
+            try {
+                const response = await fetch(`https://restapi.amap.com/v3/ip?key=${CONFIG.AMAP_WEB_KEY}`);
+                const data = await response.json();
+                
+                if (data.status === '1' && data.rectangle) {
+                    const coords = data.rectangle.split(';')[0].split(',');
+                    AppState.location = {
+                        lng: parseFloat(coords[0]),
+                        lat: parseFloat(coords[1])
+                    };
+                    showToast('📍 已定位到 ' + data.city);
+                } else {
+                    throw new Error('IP定位失败');
+                }
+            } catch (error) {
+                AppState.location = { lat: 39.9042, lng: 116.4074 };
+                showToast('📍 使用默认位置');
+            }
+        }
+
+        function spinWheel() {
+            if (AppState.isSpinning) return;
+            if (!AppState.location) {
+                showToast('请稍等，正在定位...');
+                getLocation();
+                return;
+            }
+            
+            AppState.isSpinning = true;
+            
+            const wheel = document.getElementById('wheel');
+            const randomDeg = Math.floor(Math.random() * 360) + 1800;
+            wheel.style.transform = `rotate(${randomDeg}deg)`;
+            
+            // 添加触觉反馈
+            if (navigator.vibrate) {
+                navigator.vibrate(100);
+            }
+            
+            setTimeout(() => {
+                const finalDeg = randomDeg % 360;
+                const index = Math.floor(finalDeg / 60);
+                const selectedTaste = TASTE_MAP[index];
+                
+                searchRestaurants(selectedTaste);
+                AppState.isSpinning = false;
+                
+                if (navigator.vibrate) {
+                    navigator.vibrate([100, 50, 100]);
+                }
+            }, 4000);
+        }
+
+        function quickSearch(keyword) {
+            if (!AppState.location) {
+                showToast('请稍等，正在定位...');
+                getLocation();
+                return;
+            }
+            searchRestaurants(keyword);
+        }
+
+        async function searchRestaurants(keyword) {
+            showLoading();
+
+            try {
+                const { lng, lat } = AppState.location;
+                const url = `https://restapi.amap.com/v3/place/around?key=${CONFIG.AMAP_WEB_KEY}&location=${lng},${lat}&keywords=${keyword}&types=050000|060000&radius=${CONFIG.SEARCH_RADIUS}&offset=${CONFIG.MAX_RESULTS}&extensions=all`;
+                
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                hideLoading();
+                
+                if (data.status === '1' && data.pois && data.pois.length > 0) {
+                    AppState.restaurants = data.pois;
+                    displayRestaurants(data.pois);
+                } else {
+                    showEmptyState();
+                }
+            } catch (error) {
+                hideLoading();
+                showToast('搜索失败，请重试');
+            }
+        }
+
+        function displayRestaurants(restaurants) {
+            document.getElementById('wheelSection').classList.add('hidden');
+            document.getElementById('resultsSection').classList.remove('hidden');
+            
+            const listHtml = restaurants.map((r, i) => {
+                const distance = r.distance ? 
+                    (r.distance < 1000 ? `${Math.round(r.distance)}米` : `${(r.distance / 1000).toFixed(1)}公里`) : 
+                    '未知';
+                
+                return `
+                    <div class="restaurant-card">
+                        <div class="restaurant-name">${i + 1}. ${r.name}</div>
+                        <div class="detail-row">
+                            <span>📍 地址：${r.address || '地址未知'}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span>📏 距离：<span class="detail-highlight">${distance}</span></span>
+                        </div>
+                        <div class="detail-row">
+                            <span>📞 电话：${r.tel || '暂无电话'}</span>
+                        </div>
+                        <div class="restaurant-actions">
+                            <button class="action-btn action-btn-primary" onclick="navigate(${i})">
+                                🧭 导航
+                            </button>
+                            <button class="action-btn action-btn-secondary" onclick="callRestaurant('${r.tel || ''}')">
+                                📞 电话
+                            </button>
+                            <button class="action-btn action-btn-secondary" onclick="checkIn(${i})">
+                                ✅ 打卡
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            document.getElementById('restaurantList').innerHTML = listHtml;
+            showToast('🎉 找到 ' + restaurants.length + ' 家美食！');
+        }
+
+        function showEmptyState() {
+            document.getElementById('wheelSection').classList.add('hidden');
+            document.getElementById('resultsSection').classList.remove('hidden');
+            document.getElementById('restaurantList').innerHTML = `
+                <div style="text-align: center; padding: 60px 20px;">
+                    <div style="font-size: 60px; margin-bottom: 20px;">😔</div>
+                    <div style="font-size: 20px; font-weight: 700; margin-bottom: 10px;">附近没有找到相关餐厅</div>
+                    <div style="font-size: 15px; color: #666;">试试转动转盘或选择其他选项吧！</div>
+                </div>
+            `;
+        }
+
+        function navigate(index) {
+            const r = AppState.restaurants[index];
+            const location = r.location.split(',');
+            const url = `https://uri.amap.com/navigation?to=${location[0]},${location[1]},${encodeURIComponent(r.name)}&mode=walking&src=美食大冒险&coordinate=gaode&callnative=1`;
+            window.open(url, '_blank');
+            showToast('🧭 正在打开导航...');
+        }
+
+        function callRestaurant(tel) {
+            if (tel && tel !== '暂无电话') {
+                window.location.href = `tel:${tel}`;
+            } else {
+                showToast('该餐厅暂无电话');
+            }
+        }
+
+        function checkIn(index) {
+            const r = AppState.restaurants[index];
+            saveVisit(r);
+            showToast('✅ 打卡成功！+1 美食足迹');
+            
+            if (navigator.vibrate) {
+                navigator.vibrate(200);
+            }
+        }
+
+        function backToWheel() {
+            document.getElementById('resultsSection').classList.add('hidden');
+            document.getElementById('wheelSection').classList.remove('hidden');
+            
+            const wheel = document.getElementById('wheel');
+            wheel.style.transition = 'none';
+            wheel.style.transform = 'rotate(0deg)';
+            setTimeout(() => {
+                wheel.style.transition = 'transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99)';
+            }, 50);
+        }
+
+        function showAchievements() {
+            if (AppState.achievements.length === 0) {
+                showToast('还没有成就，快去打卡吧！');
+                return;
+            }
+            
+            const list = AppState.achievements.map(a => 
+                `🏆 ${a.title} - ${a.desc}`
+            ).join('\n');
+            
+            alert('我的成就\n\n' + list);
+        }
+
+        function showHistory() {
+            if (AppState.visitHistory.length === 0) {
+                showToast('还没有打卡记录哦！');
+                return;
+            }
+            
+            const list = AppState.visitHistory.slice(-10).reverse().map((v, i) => 
+                `${i + 1}. ${v.name}\n   📅 ${new Date(v.date).toLocaleDateString()}`
+            ).join('\n\n');
+            
+            alert('最近打卡记录\n\n' + list);
+        }
+
+        function showLucky() {
+            if (AppState.restaurants.length === 0) {
+                showToast('先转动转盘找找餐厅吧！');
+                return;
+            }
+            const lucky = AppState.restaurants[Math.floor(Math.random() * AppState.restaurants.length)];
+            alert('🍀 今日幸运餐厅\n\n' + lucky.name + '\n\n快去试试吧！这是命运的安排！');
+        }
+
+        function showLoading() {
+            document.getElementById('loadingOverlay').classList.remove('hidden');
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingOverlay').classList.add('hidden');
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+</body>
+</html>

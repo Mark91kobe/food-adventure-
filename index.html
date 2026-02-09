@@ -1207,9 +1207,7 @@
                     <div class="menu-item-icon">ℹ️</div>
                     <div class="menu-item-text">关于我们</div>
                 </div>
-                <div class="menu-item" onclick="if(AppState.user) logout(); toggleMenu();" 
-
-id="logoutMenuItem" style="display: none;">
+                <div class="menu-item" onclick="if(AppState.user) logout(); toggleMenu();" id="logoutMenuItem" style="display: none;">
                     <div class="menu-item-icon">🚪</div>
                     <div class="menu-item-text">退出登录</div>
                 </div>
@@ -1225,9 +1223,7 @@ id="logoutMenuItem" style="display: none;">
                     <div class="checkin-streak" id="checkinStreak">连续0天</div>
                 </div>
                 <div class="checkin-calendar" id="checkinCalendar"></div>
-                <button class="checkin-btn" id="checkinBtn" onclick="checkin()">立即签到 +1
-
-次转盘机会</button>
+                <button class="checkin-btn" id="checkinBtn" onclick="checkin()">立即签到 +1次转盘机会</button>
             </div>
 
             <!-- 快捷操作 -->
@@ -1324,9 +1320,7 @@ id="logoutMenuItem" style="display: none;">
                         <div class="category-icon">🍔</div>
                         <div class="category-label">快餐</div>
                     </div>
-                    <div class="category-btn" onclick="quickSearch(TASTE_MAP[Math.floor
-
-(Math.random() * TASTE_MAP.length)])">
+                    <div class="category-btn" onclick="quickSearch(TASTE_MAP[Math.floor(Math.random() * TASTE_MAP.length)])">
                         <div class="category-icon">🎲</div>
                         <div class="category-label">随机</div>
                     </div>
@@ -1344,18 +1338,10 @@ id="logoutMenuItem" style="display: none;">
                 <div class="filter-section">
                     <div class="filter-title">筛选条件</div>
                     <div class="filter-options">
-                        <div class="filter-chip active" onclick="filterRestaurants('all')">
-
-全部</div>
-                        <div class="filter-chip" onclick="filterRestaurants('near')">最近
-
-</div>
-                        <div class="filter-chip" onclick="filterRestaurants('rating')">高评
-
-分</div>
-                        <div class="filter-chip" onclick="filterRestaurants('cheap')">实惠
-
-</div>
+                        <div class="filter-chip active" onclick="filterRestaurants('all')">全部</div>
+                        <div class="filter-chip" onclick="filterRestaurants('near')">最近</div>
+                        <div class="filter-chip" onclick="filterRestaurants('rating')">高评分</div>
+                        <div class="filter-chip" onclick="filterRestaurants('cheap')">实惠</div>
                     </div>
                 </div>
 
@@ -1407,15 +1393,11 @@ id="logoutMenuItem" style="display: none;">
             <form id="authForm" onsubmit="handleAuth(event)">
                 <div class="input-group">
                     <label>📱 手机号</label>
-                    <input type="tel" id="phoneInput" placeholder="请输入11位手机号" 
-
-required pattern="[0-9]{11}">
+                    <input type="tel" id="phoneInput" placeholder="请输入11位手机号" required pattern="[0-9]{11}">
                 </div>
                 <div class="input-group">
                     <label>🔒 密码</label>
-                    <input type="password" id="passwordInput" placeholder="请输入密码(至少6
-
-位)" required minlength="6">
+                    <input type="password" id="passwordInput" placeholder="请输入密码(至少6位)" required minlength="6">
                 </div>
                 <button type="submit" class="submit-btn" id="submitBtn">登录</button>
             </form>
@@ -1433,22 +1415,16 @@ required pattern="[0-9]{11}">
             <div class="modal-title">✏️ 编辑资料</div>
             
             <div class="avatar-upload">
-                <div class="avatar-preview" id="avatarPreview" 
-
-onclick="document.getElementById('avatarOptions').classList.toggle('hidden')">
+                <div class="avatar-preview" id="avatarPreview" onclick="document.getElementById('avatarOptions').classList.toggle('hidden')">
                     😊
                 </div>
-                <div style="font-size: 13px; color: #999; margin-bottom: 10px;">点击头像更
-
-换</div>
+                <div style="font-size: 13px; color: #999; margin-bottom: 10px;">点击头像更换</div>
                 <div class="avatar-options hidden" id="avatarOptions"></div>
             </div>
 
             <div class="input-group">
                 <label>✨ 昵称</label>
-                <input type="text" id="nicknameInput" placeholder="请输入昵称(最多10字)" 
-
-maxlength="10">
+                <input type="text" id="nicknameInput" placeholder="请输入昵称(最多10字)" maxlength="10">
             </div>
 
             <button class="submit-btn" onclick="saveProfile()">💾 保存</button>
@@ -1517,9 +1493,7 @@ maxlength="10">
         };
 
         const TASTE_MAP = ['川菜', '粤菜', '日料', '火锅', '烧烤', '西餐'];
-        const AVATAR_OPTIONS = ['😊', '😎', '🤗', '😋', '🥳', '🤩', '😇', '🥰', '🍕', '🍔', 
-
-'🍜', '🍱', '🍰', '🍦', '🎂', '🍩'];
+        const AVATAR_OPTIONS = ['😊', '😎', '🤗', '😋', '🥳', '🤩', '😇', '🥰', '🍕', '🍔', '🍜', '🍱', '🍰', '🍦', '🎂', '🍩'];
 
         // ============ 工具函数 ============
         function showToast(message) {
@@ -1575,15 +1549,9 @@ maxlength="10">
             
             // 更新菜单信息
             if (AppState.user) {
-                document.getElementById('menuAvatar').textContent = AppState.user.avatar || 
-
-'😊';
-                document.getElementById('menuUserName').textContent = 
-
-AppState.user.nickname || '美食家';
-                document.getElementById('menuUserInfo').textContent = 
-
-AppState.user.vipLevel ? `VIP ${AppState.user.vipLevel} 会员` : '普通用户';
+                document.getElementById('menuAvatar').textContent = AppState.user.avatar || '😊';
+                document.getElementById('menuUserName').textContent = AppState.user.nickname || '美食家';
+                document.getElementById('menuUserInfo').textContent = AppState.user.vipLevel ? `VIP ${AppState.user.vipLevel} 会员` : '普通用户';
                 document.getElementById('logoutMenuItem').style.display = 'flex';
             } else {
                 document.getElementById('menuAvatar').textContent = '😊';
@@ -1592,19 +1560,13 @@ AppState.user.vipLevel ? `VIP ${AppState.user.vipLevel} 会员` : '普通用户'
                 document.getElementById('logoutMenuItem').style.display = 'none';
             }
             
-            document.getElementById('menuHistoryCount').textContent = 
-
-AppState.visitHistory.length;
-            document.getElementById('menuAchievementCount').textContent = 
-
-document.getElementById('achievementCount').textContent;
+            document.getElementById('menuHistoryCount').textContent = AppState.visitHistory.length;
+            document.getElementById('menuAchievementCount').textContent = document.getElementById('achievementCount').textContent;
         }
 
         // ============ 底部导航切换 ============
         function switchTab(tab) {
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove
-
-('active'));
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             event.currentTarget.classList.add('active');
             
             switch(tab) {
@@ -1730,16 +1692,12 @@ document.getElementById('achievementCount').textContent;
                     <div class="user-avatar" onclick="showProfile()">${avatar}</div>
                     <div class="user-details">
                         <div class="user-name">${AppState.user.nickname || '美食家'}</div>
-                        ${AppState.user.vipLevel ? `<span class="vip-badge">VIP 
-
-${AppState.user.vipLevel}</span>` : ''}
+                        ${AppState.user.vipLevel ? `<span class="vip-badge">VIP ${AppState.user.vipLevel}</span>` : ''}
                     </div>
                 `;
                 spinCountDisplay.textContent = `剩余: ${AppState.spinCount}次`;
             } else {
-                userInfo.innerHTML = `<button class="login-btn" onclick="showModal
-
-('loginModal')">登录</button>`;
+                userInfo.innerHTML = `<button class="login-btn" onclick="showModal('loginModal')">登录</button>`;
                 spinCountDisplay.textContent = '剩余: 0次';
             }
         }
@@ -1752,16 +1710,12 @@ ${AppState.user.vipLevel}</span>` : ''}
                 return;
             }
 
-            document.getElementById('avatarPreview').textContent = AppState.user.avatar || 
-
-'😊';
+            document.getElementById('avatarPreview').textContent = AppState.user.avatar || '😊';
             document.getElementById('nicknameInput').value = AppState.user.nickname || '';
             
             const avatarOptions = document.getElementById('avatarOptions');
             avatarOptions.innerHTML = AVATAR_OPTIONS.map(emoji => 
-                `<div class="avatar-option ${emoji === AppState.user.avatar ? 'selected' : 
-
-''}" onclick="selectAvatar('${emoji}')">${emoji}</div>`
+                `<div class="avatar-option ${emoji === AppState.user.avatar ? 'selected' : ''}" onclick="selectAvatar('${emoji}')">${emoji}</div>`
             ).join('');
             
             showModal('profileModal');
@@ -1769,9 +1723,7 @@ ${AppState.user.vipLevel}</span>` : ''}
 
         function selectAvatar(emoji) {
             document.getElementById('avatarPreview').textContent = emoji;
-            document.querySelectorAll('.avatar-option').forEach(opt => 
-
-opt.classList.remove('selected'));
+            document.querySelectorAll('.avatar-option').forEach(opt => opt.classList.remove('selected'));
             event.target.classList.add('selected');
             AppState.user.avatar = emoji;
         }
@@ -1840,9 +1792,7 @@ opt.classList.remove('selected'));
                 const isChecked = AppState.checkinDays.includes(i);
                 const isToday = i === today;
                 html += `
-                    <div class="checkin-day ${isChecked ? 'checked' : ''} ${isToday ? 
-
-'today' : ''}">
+                    <div class="checkin-day ${isChecked ? 'checked' : ''} ${isToday ? 'today' : ''}">
                         <div style="font-size: 10px; margin-bottom: 3px;">Day</div>
                         <div style="font-weight: 700;">${i}</div>
                     </div>
@@ -1856,9 +1806,7 @@ opt.classList.remove('selected'));
             const hasCheckedToday = userCheckins.includes(todayStr);
             
             checkinBtn.disabled = hasCheckedToday;
-            checkinBtn.textContent = hasCheckedToday ? '✅ 今日已签到' : '📅 立即签到 +1次
-
-转盘机会';
+            checkinBtn.textContent = hasCheckedToday ? '✅ 今日已签到' : '📅 立即签到 +1次转盘机会';
             
             // 更新连续签到天数
             const streak = calculateStreak(userCheckins);
@@ -1897,9 +1845,7 @@ opt.classList.remove('selected'));
                 year: { name: '年度会员', price: 168, spins: 999, level: 3 }
             };
 
-            if (confirm(`确定购买${plans[plan].name}(¥${plans[plan].price})吗?\n\n这是演示
-
-版本,实际不会扣费`)) {
+            if (confirm(`确定购买${plans[plan].name}(¥${plans[plan].price})吗?\n\n这是演示版本,实际不会扣费`)) {
                 AppState.user.vipLevel = plans[plan].level;
                 AppState.spinCount += plans[plan].spins;
                 
@@ -1939,9 +1885,7 @@ opt.classList.remove('selected'));
 
         async function useIPLocation() {
             try {
-                const response = await fetch(`https://restapi.amap.com/v3/ip?key=
-
-${CONFIG.AMAP_WEB_KEY}`);
+                const response = await fetch(`https://restapi.amap.com/v3/ip?key=${CONFIG.AMAP_WEB_KEY}`);
                 const data = await response.json();
                 
                 if (data.status === '1' && data.rectangle) {
@@ -2030,11 +1974,7 @@ ${CONFIG.AMAP_WEB_KEY}`);
 
             try {
                 const { lng, lat } = AppState.location;
-                const url = `https://restapi.amap.com/v3/place/around?key=
-
-${CONFIG.AMAP_WEB_KEY}&location=${lng},${lat}&keywords=${keyword}&types=050000|
-
-060000&radius=${CONFIG.SEARCH_RADIUS}&offset=${CONFIG.MAX_RESULTS}&extensions=all`;
+                const url = `https://restapi.amap.com/v3/place/around?key=${CONFIG.AMAP_WEB_KEY}&location=${lng},${lat}&keywords=${keyword}&types=050000|060000&radius=${CONFIG.SEARCH_RADIUS}&offset=${CONFIG.MAX_RESULTS}&extensions=all`;
                 
                 const response = await fetch(url);
                 const data = await response.json();
@@ -2058,9 +1998,7 @@ ${CONFIG.AMAP_WEB_KEY}&location=${lng},${lat}&keywords=${keyword}&types=050000|
         // ============ 筛选功能 ============
         function filterRestaurants(type) {
             // 更新筛选按钮状态
-            document.querySelectorAll('.filter-chip').forEach(chip => 
-
-chip.classList.remove('active'));
+            document.querySelectorAll('.filter-chip').forEach(chip => chip.classList.remove('active'));
             event.target.classList.add('active');
             
             AppState.currentFilter = type;
@@ -2068,19 +2006,13 @@ chip.classList.remove('active'));
             
             switch(type) {
                 case 'near':
-                    filtered.sort((a, b) => (a.distance || 999999) - (b.distance || 
-
-999999));
+                    filtered.sort((a, b) => (a.distance || 999999) - (b.distance || 999999));
                     break;
                 case 'rating':
-                    filtered.sort((a, b) => (parseFloat(b.rating || 0)) - (parseFloat
-
-(a.rating || 0)));
+                    filtered.sort((a, b) => (parseFloat(b.rating || 0)) - (parseFloat(a.rating || 0)));
                     break;
                 case 'cheap':
-                    filtered.sort((a, b) => (parseFloat(a.price || 999)) - (parseFloat
-
-(b.price || 999)));
+                    filtered.sort((a, b) => (parseFloat(a.price || 999)) - (parseFloat(b.price || 999)));
                     break;
                 case 'all':
                 default:
@@ -2097,9 +2029,7 @@ chip.classList.remove('active'));
             
             const listHtml = restaurants.map((r, i) => {
                 const distance = r.distance ? 
-                    (r.distance < 1000 ? `${Math.round(r.distance)}米` : `${(r.distance / 
-
-1000).toFixed(1)}公里`) : 
+                    (r.distance < 1000 ? `${Math.round(r.distance)}米` : `${(r.distance / 1000).toFixed(1)}公里`) : 
                     '未知';
                 
                 const rating = r.rating || '暂无';
@@ -2109,54 +2039,36 @@ chip.classList.remove('active'));
                     <div class="restaurant-card">
                         <div class="restaurant-header">
                             <div class="restaurant-name">${i + 1}. ${r.name}</div>
-                            ${rating !== '暂无' ? `<div class="restaurant-rating">⭐ 
-
-${rating}</div>` : ''}
+                            ${rating !== '暂无' ? `<div class="restaurant-rating">⭐ ${rating}</div>` : ''}
                         </div>
                         <div class="detail-row">
                             <span>📍 ${r.address || '地址未知'}</span>
                         </div>
                         <div class="detail-row">
-                            <span>📏 距离: <span class="detail-highlight">${distance}
-
-</span></span>
+                            <span>📏 距离: <span class="detail-highlight">${distance}</span></span>
                         </div>
                         <div class="detail-row">
                             <span>📞 ${r.tel || '暂无电话'}</span>
                         </div>
                         <div class="restaurant-actions">
-                            <button class="action-btn action-btn-primary" 
-
-onclick="navigate(${i})">
+                            <button class="action-btn action-btn-primary" onclick="navigate(${i})">
                                 🧭 导航
                             </button>
-                            <button class="action-btn action-btn-secondary" 
-
-onclick="callRestaurant('${r.tel || ''}')">
+                            <button class="action-btn action-btn-secondary" onclick="callRestaurant('${r.tel || ''}')">
                                 📞 电话
                             </button>
-                            <button class="action-btn action-btn-secondary" 
-
-onclick="toggleFavorite(${i})">
-                                ${isFavorite ? '❤️' : '🤍'} ${isFavorite ? '已收藏' : '收
-
-藏'}
+                            <button class="action-btn action-btn-secondary" onclick="toggleFavorite(${i})">
+                                ${isFavorite ? '❤️' : '🤍'} ${isFavorite ? '已收藏' : '收藏'}
                             </button>
                         </div>
                         <div class="restaurant-actions" style="margin-top: 10px;">
-                            <button class="action-btn action-btn-secondary" 
-
-onclick="checkIn(${i})">
+                            <button class="action-btn action-btn-secondary" onclick="checkIn(${i})">
                                 ✅ 打卡
                             </button>
-                            <button class="action-btn action-btn-secondary" 
-
-onclick="shareRestaurant(${i})">
+                            <button class="action-btn action-btn-secondary" onclick="shareRestaurant(${i})">
                                 📤 分享
                             </button>
-                            <button class="action-btn action-btn-secondary" 
-
-onclick="viewDetails(${i})">
+                            <button class="action-btn action-btn-secondary" onclick="viewDetails(${i})">
                                 ℹ️ 详情
                             </button>
                         </div>
@@ -2175,9 +2087,7 @@ onclick="viewDetails(${i})">
                 <div class="empty-state">
                     <div class="empty-icon">😔</div>
                     <div class="empty-title">附近没有找到相关餐厅</div>
-                    <div class="empty-desc">试试转动转盘或选择其他选项吧!<br>也可以扩大搜索
-
-范围</div>
+                    <div class="empty-desc">试试转动转盘或选择其他选项吧!<br>也可以扩大搜索范围</div>
                 </div>
             `;
         }
@@ -2186,9 +2096,7 @@ onclick="viewDetails(${i})">
         function navigate(index) {
             const r = AppState.filteredRestaurants[index];
             const location = r.location.split(',');
-            const url = `https://uri.amap.com/navigation?to=${location[0]},${location[1]},
-
-${encodeURIComponent(r.name)}&mode=walking&src=美食大冒险&coordinate=gaode&callnative=1`;
+            const url = `https://uri.amap.com/navigation?to=${location[0]},${location[1]},${encodeURIComponent(r.name)}&mode=walking&src=美食大冒险&coordinate=gaode&callnative=1`;
             window.open(url, '_blank');
             showToast('🧭 正在打开导航...');
         }
@@ -2251,9 +2159,7 @@ ${encodeURIComponent(r.name)}&mode=walking&src=美食大冒险&coordinate=gaode&
 
         function shareRestaurant(index) {
             const r = AppState.filteredRestaurants[index];
-            const text = `我发现了一家不错的餐厅:\n${r.name}\n地址: ${r.address}\n电话: 
-
-${r.tel || '暂无'}`;
+            const text = `我发现了一家不错的餐厅:\n${r.name}\n地址: ${r.address}\n电话: ${r.tel || '暂无'}`;
             
             if (navigator.share) {
                 navigator.share({
@@ -2274,9 +2180,7 @@ ${r.tel || '暂无'}`;
 
         function viewDetails(index) {
             const r = AppState.filteredRestaurants[index];
-            alert(`餐厅详情\n\n名称: ${r.name}\n地址: ${r.address || '未知'}\n电话: ${r.tel 
-
-|| '暂无'}\n评分: ${r.rating || '暂无'}\n类型: ${r.type || '未知'}`);
+            alert(`餐厅详情\n\n名称: ${r.name}\n地址: ${r.address || '未知'}\n电话: ${r.tel || '暂无'}\n评分: ${r.rating || '暂无'}\n类型: ${r.type || '未知'}`);
         }
 
         function backToWheel() {
@@ -2287,9 +2191,7 @@ ${r.tel || '暂无'}`;
             wheel.style.transition = 'none';
             wheel.style.transform = 'rotate(0deg)';
             setTimeout(() => {
-                wheel.style.transition = 'transform 4s cubic-bezier(0.17, 0.67, 0.12, 
-
-0.99)';
+                wheel.style.transition = 'transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99)';
             }, 50);
         }
 
@@ -2311,9 +2213,7 @@ ${r.tel || '暂无'}`;
                 return;
             }
             
-            const list = unlocked.map(a => `${a.icon} ${a.title}\n   ${a.desc}`).join('\n
-
-\n');
+            const list = unlocked.map(a => `${a.icon} ${a.title}\n   ${a.desc}`).join('\n\n');
             alert(`🏆 我的成就 (${unlocked.length}/${achievements.length})\n\n${list}`);
             
             document.getElementById('achievementCount').textContent = unlocked.length;
@@ -2326,9 +2226,7 @@ ${r.tel || '暂无'}`;
             }
             
             const list = AppState.visitHistory.slice(-10).reverse().map((v, i) => 
-                `${i + 1}. ${v.name}\n   📍 ${v.address || '未知'}\n   📅 ${new Date
-
-(v.date).toLocaleDateString()}`
+                `${i + 1}. ${v.name}\n   📍 ${v.address || '未知'}\n   📅 ${new Date(v.date).toLocaleDateString()}`
             ).join('\n\n');
             
             alert(`📝 最近打卡记录 (共${AppState.visitHistory.length}次)\n\n${list}`);
@@ -2341,9 +2239,7 @@ ${r.tel || '暂无'}`;
             }
             
             const list = AppState.favorites.slice(-10).reverse().map((f, i) => 
-                `${i + 1}. ${f.name}\n   📍 ${f.address || '未知'}\n   📞 ${f.tel || '暂
-
-无'}`
+                `${i + 1}. ${f.name}\n   📍 ${f.address || '未知'}\n   📞 ${f.tel || '暂无'}`
             ).join('\n\n');
             
             alert(`⭐ 我的收藏 (共${AppState.favorites.length}家)\n\n${list}`);
@@ -2354,11 +2250,7 @@ ${r.tel || '暂无'}`;
         }
 
         function showAbout() {
-            alert('ℹ️ 关于我们\n\n美食大冒险 v1.0\n\n一款帮你解决"今天吃什么"难题的应用
-
-\n\n功能特色:\n• 转盘抽奖\n• 附近美食推荐\n• 打卡记录\n• 成就系统\n• 会员特权\n\n© 2024 美
-
-食大冒险');
+            alert('ℹ️ 关于我们\n\n美食大冒险 v1.0\n\n一款帮你解决"今天吃什么"难题的应用\n\n功能特色:\n• 转盘抽奖\n• 附近美食推荐\n• 打卡记录\n• 成就系统\n• 会员特权\n\n© 2024 美食大冒险');
         }
 
         // ============ 加载用户数据 ============
@@ -2371,21 +2263,13 @@ ${r.tel || '暂无'}`;
                 const checkins = getFromLocal(`checkin_${AppState.user.phone}`) || [];
                 AppState.checkinDays = checkins.map(d => new Date(d).getDate());
                 
-                AppState.visitHistory = getFromLocal(`history_${AppState.user.phone}`) || 
-
-[];
-                AppState.favorites = getFromLocal(`favorites_${AppState.user.phone}`) || 
-
-[];
+                AppState.visitHistory = getFromLocal(`history_${AppState.user.phone}`) || [];
+                AppState.favorites = getFromLocal(`favorites_${AppState.user.phone}`) || [];
                 
                 updateUserUI();
                 updateCheckinUI();
-                document.getElementById('visitCount').textContent = 
-
-AppState.visitHistory.length;
-                document.getElementById('favoriteCount').textContent = 
-
-AppState.favorites.length;
+                document.getElementById('visitCount').textContent = AppState.visitHistory.length;
+                document.getElementById('favoriteCount').textContent = AppState.favorites.length;
                 
                 const achievements = [
                     { count: 1, title: '美食新手' },
@@ -2394,9 +2278,7 @@ AppState.favorites.length;
                     { count: 20, title: '美食大师' },
                     { count: 50, title: '美食传说' }
                 ];
-                const unlocked = achievements.filter(a => AppState.visitHistory.length >= 
-
-a.count);
+                const unlocked = achievements.filter(a => AppState.visitHistory.length >= a.count);
                 document.getElementById('achievementCount').textContent = unlocked.length;
                 
             } catch (e) {
